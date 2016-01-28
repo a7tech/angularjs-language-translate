@@ -1,0 +1,47 @@
+<!doctype html>
+  <html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="Description" content="angular translate">
+    <title>Angular translate.</title>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-translate.js"></script>
+    <script>
+      var app = angular.module('at', ['pascalprecht.translate']);
+      app.config(function ($translateProvider) {
+        $translateProvider.translations('en', {
+            Title : 'Hello World',
+            Description: 'This is a description.',
+            BUTTON_LANG_EN: 'English',
+            BUTTON_LANG_EN: 'English',
+            BUTTON_LANG_FA: 'Parsian'
+        });
+        $translateProvider.translations('fa', {
+          Title: 'سلام دنیا',
+          Description: 'این شرح است',
+          BUTTON_LANG_EN: 'انگلیسی',
+          BUTTON_LANG_FA: 'پارسیان'
+        });
+        $translateProvider.preferredLanguage('fa');
+      });
+
+      app.controller('Ctrl', function ($scope, $translate) {
+        $scope.changeLanguage = function (key) {
+          $translate.use(key);
+        };
+      });
+    </script>
+  </head>
+  <body ng-app="at">
+  <div class="span4">
+          <div class="well">
+              <h2 translate="Title">Hello</h2>
+              <p translate="Description">This is a paragraph</p>
+          </div>
+          <div ng-controller="Ctrl">
+            <button class="btn" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN" class="ng-scope">English</button>
+            <button class="btn" ng-click="changeLanguage('fa')" translate="BUTTON_LANG_FA" class="ng-scope">Parsian</button>
+          </div>
+        </div>
+  </body>
+</html>
